@@ -16,11 +16,11 @@ namespace Cainos.PixelArtTopDown_Basic
         private float dashingTime = 0.2f;
         private float dashingCooldown = 1f;
 
-        [SerializeField] private TrailRenderer tr;
+        [SerializeField] private TrailRenderer tr; //get the trailrenderer from this gameObject
 
         private void Start()
         {
-            animator = GetComponent<Animator>();
+            animator = GetComponent<Animator>(); //get the animator component from this gameObject
         }
 
 
@@ -42,7 +42,8 @@ namespace Cainos.PixelArtTopDown_Basic
                 else{
                     dir.x = -1;
                     dir.Normalize();
-                    animator.SetInteger("Direction", 3);
+                    transform.localScale = new Vector3(1, 1, 1);
+                    animator.CrossFade("sideWalk", 0);
                 }
             }
 
@@ -54,7 +55,9 @@ namespace Cainos.PixelArtTopDown_Basic
                 else{
                     dir.x = 1;
                     dir.Normalize();
-                    animator.SetInteger("Direction", 2);
+                    //flip the sprite 
+                    transform.localScale = new Vector3(-1, 1, 1);
+                    animator.CrossFade("sideWalk", 0);
                 }
             }
 
@@ -66,7 +69,7 @@ namespace Cainos.PixelArtTopDown_Basic
                 else{
                     dir.y = 1;
                     dir.Normalize();
-                    animator.SetInteger("Direction", 1);
+                    animator.CrossFade("upWalk", 0);
                 }
             }
             else if (Input.GetKey(KeyCode.S))
@@ -77,11 +80,14 @@ namespace Cainos.PixelArtTopDown_Basic
                 else{
                     dir.y = -1;
                     dir.Normalize();
-                    animator.SetInteger("Direction", 0);
+                    animator.CrossFade("downWalk", 0);
                 }
             }
-
-            animator.SetBool("IsMoving", dir.magnitude > 0);
+            //if player is not moving, play idle animation
+            if (dir.x == 0 && dir.y == 0)
+            {
+                animator.CrossFade("idle", 0);
+            }
 
             GetComponent<Rigidbody2D>().velocity = speed * dir;
         }
