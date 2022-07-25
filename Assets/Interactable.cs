@@ -21,34 +21,32 @@ public class Interactable : MonoBehaviour
         _dialoguePanel = GameObject.FindGameObjectWithTag("Dialogue"); //get the dialogue panel
         //set the default dialogue panel scale to be 0
         _dialoguePanel.transform.localScale = new Vector3(0, 0, 0);
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        //check if player is nearby, if yes, show the interact button above this gameObject
-        if (Vector3.Distance(transform.position, _player.transform.position) < 1) 
+        if (Vector3.Distance(transform.position, _player.transform.position) < 1) //check if player is nearby, if yes, show the interact button above this gameObject 
         {
-            //show the interact "E" button
-            //instantiate the interact button
-            if(!run){
-                run = true;
-                interactInstance = instantiateGameObject(_interactButton, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+            if(!run){ //only run once
+                run = true; 
+                interactInstance = instantiateGameObject(_interactButton, transform.position + new Vector3(0, 1, 0), Quaternion.identity); //create a new instance of the interact button
             }
 
-            //change the interact button transform position to above the gameObject
-            //check if user pressed the 'E' button;
-            if (Input.GetKeyDown(KeyCode.E) && dialogueInstance == null)
+            if (Input.GetKeyDown(KeyCode.E) && dialogueInstance == null) //check if user pressed the 'E' button;
             {
-                //instantiate the dialogue panel on GUI
-                dialogueInstance = instantiateGameObject(_dialoguePanel, _dialoguePanel.transform.position, Quaternion.identity);
-                //set dialogueInstance scaling to 1
-                dialogueInstance.transform.localScale = new Vector3(1, 1, 1);
-                //set the dialogue text to dialogueInstance
-                dialogueInstance.GetComponentInChildren<TextMeshProUGUI>().text = _displayedDialogue;
-                //set this gameObject parent GUI
-                dialogueInstance.transform.SetParent(GameObject.Find("GUI").transform);
+                //if the _displayedDialogue string is longer than 10 words, put the words that doesnt fit into new panel after the first 10 words
+                if(_displayedDialogue.Length > 10)
+                {
+                    //split the string into an array of words
+                    string[] wordArray = _displayedDialogue.Split(' ');
+                    //create a new string
+                    string splitDialogue = "";
+
+                }
+                else{
+                    dialoguePanel(_displayedDialogue); //create a new instance of the dialogue panel
+                }
             }
         }
         else //when player is not nearby
@@ -62,12 +60,25 @@ public class Interactable : MonoBehaviour
             //disable this script instance in this gameobject
         }
     }
-    //function that returns the instantiated gameobject
+    //to display the dialogue panel on screen
+    void dialoguePanel(string _displayedDialogue)
+    {
+        //instantiate the dialogue panel on GUI
+        dialogueInstance = instantiateGameObject(_dialoguePanel, _dialoguePanel.transform.position, Quaternion.identity);
+        //set dialogueInstance scaling to 1
+        dialogueInstance.transform.localScale = new Vector3(1, 1, 1);
+        //set the dialogue text to dialogueInstance
+        dialogueInstance.GetComponentInChildren<TextMeshProUGUI>().text = _displayedDialogue;
+        //set this gameObject parent GUI
+        dialogueInstance.transform.SetParent(GameObject.Find("GUI").transform);
+    }
+
+    //method to return an instantiated gameObject
     public GameObject instantiateGameObject(GameObject gameObject, Vector3 position, Quaternion rotation)
     {
         return Instantiate(gameObject, position, rotation);
     }
-
+    //method to destroy gameObject
     void destroyGameObject(GameObject gameObject)
     {
         Destroy(gameObject);
