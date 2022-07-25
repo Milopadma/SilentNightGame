@@ -40,9 +40,16 @@ public class Interactable : MonoBehaviour
                 {
                     //split the string into an array of words
                     string[] wordArray = _displayedDialogue.Split(' ');
-                    //create a new string
-                    string splitDialogue = "";
-
+                    //new string with the first 10 words
+                    string newString = "";
+                    for(int i = 0; i < 10; i++)
+                    {
+                        newString += wordArray[i] + " ";
+                    }
+                    //show the first 10 words in the dialogue panel
+                    dialoguePanel(newString);
+                    //wati coroutine to show the rest of the words in the dialogue panel
+                    StartCoroutine(showRestOfDialogue(wordArray));
                 }
                 else{
                     dialoguePanel(_displayedDialogue); //create a new instance of the dialogue panel
@@ -82,6 +89,20 @@ public class Interactable : MonoBehaviour
     void destroyGameObject(GameObject gameObject)
     {
         Destroy(gameObject);
+    }
+    IEnumerator showRestOfDialogue(string[] wordArray){
+        // yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
+        if(Input.GetKeyDown(KeyCode.Return)){
+            destroyGameObject(dialogueInstance); //destroy the dialogue panel
+            //new string with the rest of the words
+            string secondBatchString = "";
+            for(int i = 10; i < wordArray.Length; i++)
+            {
+                secondBatchString += wordArray[i] + " ";
+            }
+            dialoguePanel(secondBatchString);
+        }
     }
 }
 
