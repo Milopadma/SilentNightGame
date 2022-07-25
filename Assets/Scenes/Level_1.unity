@@ -1920,7 +1920,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interactButton: {fileID: 18603885}
-  _displayedDialogue: The note says "If youre reading this, that means you woke up.""
+  _displayedDialogue: The note says "If youre reading this, that means you... ...woke
+    up, go home, NOW"
   run: 0
 --- !u!1 &276694201
 GameObject:
@@ -4266,7 +4267,7 @@ GameObject:
   m_Layer: 0
   m_Name: SceneChangeZone
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -4323,6 +4324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65dc28736fabc8f4e8e1a3234a2fbb6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneName: Level_2
 --- !u!114 &795735201 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2069557391971969150, guid: d8bc59d60f205614fa5a657755bbf038,
@@ -4803,6 +4805,12 @@ PrefabInstance:
       propertyPath: m_UseAutoMass
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8150476868300563372, guid: 2e2ac125e54a1e44780363d638b1df34,
+        type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000,
+        type: 0}
     - target: {fileID: 8150476868300563372, guid: 2e2ac125e54a1e44780363d638b1df34,
         type: 3}
       propertyPath: m_Name
@@ -5719,12 +5727,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1330674666 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8150476868300563372, guid: 2e2ac125e54a1e44780363d638b1df34,
+    type: 3}
+  m_PrefabInstance: {fileID: 1078363927}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1330674667 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8150476868300563375, guid: 2e2ac125e54a1e44780363d638b1df34,
     type: 3}
   m_PrefabInstance: {fileID: 1078363927}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1330674671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1330674666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5916edface6cce42896270b9784eaa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactButton: {fileID: 18603885}
+  _displayedDialogue: where did everybody go?
+  run: 0
 --- !u!4 &1399184216 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8150476868300563375, guid: 2e2ac125e54a1e44780363d638b1df34,
@@ -5940,7 +5969,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interactButton: {fileID: 18603885}
-  _displayedDialogue: This appears to be a TV. I wonder who uses this old box anymore?
+  _displayedDialogue: This appears to be a TV. I wonder who uses... ...this old box
+    anymore?
   run: 0
 --- !u!1 &1689011109
 GameObject:

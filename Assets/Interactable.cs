@@ -14,6 +14,12 @@ public class Interactable : MonoBehaviour
     private GameObject dialogueInstance; //the instance of the dialogue panel
     public bool run = false; //whether the interact button should be displayed
 
+    private string[] wordArray; 
+    string firstString = "";
+    string secondString = "";
+    private bool showNextDialogue = false;
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,33 +34,30 @@ public class Interactable : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, _player.transform.position) < 1) //check if player is nearby, if yes, show the interact button above this gameObject 
         {
+            //split the string into an array of words
+            wordArray = _displayedDialogue.Split(' ');
+            //this is for interact button
             if(!run){ //only run once
                 run = true; 
                 interactInstance = instantiateGameObject(_interactButton, transform.position + new Vector3(0, 1, 0), Quaternion.identity); //create a new instance of the interact button
             }
-
+            //this is for dialogue
             if (Input.GetKeyDown(KeyCode.E) && dialogueInstance == null) //check if user pressed the 'E' button;
             {
                 //if the _displayedDialogue string is longer than 10 words, put the words that doesnt fit into new panel after the first 10 words
-                if(_displayedDialogue.Length > 10)
+                if(wordArray.Length > 10)
                 {
-                    //split the string into an array of words
-                    string[] wordArray = _displayedDialogue.Split(' ');
                     //new string with the first 10 words
-                    string newString = "";
-                    for(int i = 0; i < 10; i++)
-                    {
-                        newString += wordArray[i] + " ";
-                    }
+                    for(int i = 0; i < 10; i++){firstString += wordArray[i] + " ";}
                     //show the first 10 words in the dialogue panel
-                    dialoguePanel(newString);
-                    //wati coroutine to show the rest of the words in the dialogue panel
-                    StartCoroutine(showRestOfDialogue(wordArray));
+                    dialoguePanel(firstString);
+                    //set to allow next set of dialogue to show
+                    showNextDialogue = true;
+
                 }
-                else{
-                    dialoguePanel(_displayedDialogue); //create a new instance of the dialogue panel
-                }
+                else{dialoguePanel(_displayedDialogue);} //create a new instance of the dialogue panel
             }
+        StartCoroutine(showRestOfDialogue(wordArray));
         }
         else //when player is not nearby
         {
@@ -63,6 +66,9 @@ public class Interactable : MonoBehaviour
             if(interactInstance != null){
                 Destroy(interactInstance);
             }
+            //reset everything
+            firstString = "";
+            secondString = "";
             Destroy(dialogueInstance);
             //disable this script instance in this gameobject
         }
@@ -90,18 +96,21 @@ public class Interactable : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
     IEnumerator showRestOfDialogue(string[] wordArray){
-        // yield return new WaitForSeconds(1f);
-        yield return new WaitForSeconds(0.5f);
-        if(Input.GetKeyDown(KeyCode.Return)){
+        yield return new WaitForSeconds(0.35f);
+        if(Input.GetKeyDown(KeyCode.E) && dialogueInstance != null && showNextDialogue == true) //if player presses E again and theres more dialogue to show, run this
+        {
             destroyGameObject(dialogueInstance); //destroy the dialogue panel
+            //reset firstString
+            firstString = "";
+            secondString = "";
             //new string with the rest of the words
-            string secondBatchString = "";
-            for(int i = 10; i < wordArray.Length; i++)
-            {
-                secondBatchString += wordArray[i] + " ";
-            }
-            dialoguePanel(secondBatchString);
+            for(int i = 10; i < wordArray.Length; i++){secondString += wordArray[i] + " ";}
+            //instantiate dialogue panel with second set of string
+            dialoguePanel(secondString);
+            //set to false to prevent next set of dialogue to show
+            showNextDialogue = false;
         }
     }
 }
