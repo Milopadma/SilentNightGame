@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
+//signed //I GUSTI BAGUS MILO PADMA WIJAYA 
 public class Interactable : MonoBehaviour
 {
     private GameObject _player; //the player
@@ -14,11 +14,13 @@ public class Interactable : MonoBehaviour
     private GameObject dialogueInstance; //the instance of the dialogue panel
     public bool run = false; //whether the interact button should be displayed
 
-    private string[] wordArray; 
-    string firstString = "";
-    string secondString = "";
-    private bool showNextDialogue = false;
+    private string[] wordArray; //the array of words in the dialogue
+    string firstString = ""; //the first string of the dialogue
+    string secondString = ""; //the second string of the dialogue
+    private bool showNextDialogue = false; //whether the next dialogue should be displayed
     
+    public int _objectiveID; //if an interactible has an objectiveID, when user interacts with it, it will call nextObjective() in ObjectiveController.cs
+    public bool _isInteracted = false; //whether this instance of interactible has been interacted with
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +46,7 @@ public class Interactable : MonoBehaviour
             //this is for dialogue
             if (Input.GetKeyDown(KeyCode.E) && dialogueInstance == null) //check if user pressed the 'E' button;
             {
+                checkForObjectiveID(); //check if this instance of interactible has an objectiveID
                 //if the _displayedDialogue string is longer than 10 words, put the words that doesnt fit into new panel after the first 10 words
                 if(wordArray.Length > 10)
                 {
@@ -111,6 +114,18 @@ public class Interactable : MonoBehaviour
             dialoguePanel(secondString);
             //set to false to prevent next set of dialogue to show
             showNextDialogue = false;
+        }
+    }
+    void checkForObjectiveID()
+    {
+        if(_objectiveID != 0 && !_isInteracted)
+        {
+            _isInteracted = true;
+            ObjectiveController.instance.nextObjective();
+        }
+        else
+        {
+            Debug.Log("No objective ID assigned to this interactible");
         }
     }
 }
