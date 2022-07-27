@@ -13,8 +13,9 @@ public class PlayerMovementController : MonoBehaviour
     private bool isDashing;
     public float dashPower;
     private float dashingTime = 0.2f;
-    private float dashingCooldown = 1f;
     private float _cooldownValue;
+
+    public GameObject _escPanel;
 
     [SerializeField] private GameObject _staminaGUI;
     [SerializeField] private TrailRenderer tr; //get the trailrenderer from this gameObject
@@ -24,6 +25,7 @@ public class PlayerMovementController : MonoBehaviour
         animator = GetComponent<Animator>(); //get the animator component from this gameObject
         _cooldownValue = 100f;
         UpdateStaminaGUI();
+        _escPanel.SetActive(false);
     }
 
 
@@ -31,6 +33,12 @@ public class PlayerMovementController : MonoBehaviour
     {
         Vector2 dir = Vector2.zero;
         
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            pauseGame();
+        }
+
+
         //basic wasd movement
         if(Input.GetKeyDown(KeyCode.LeftShift) && canDash)
         {
@@ -125,5 +133,20 @@ public class PlayerMovementController : MonoBehaviour
         //get the stamina bar slider from staminaBar gameObject GUI
         Slider staminaBar = _staminaGUI.GetComponent<Slider>();
         staminaBar.value = _cooldownValue;
+    }
+
+    //when player presses ESC, pause the game
+    public void pauseGame()
+    {
+        if (Time.timeScale == 1)
+        {
+            _escPanel.SetActive(true);
+            Time.timeScale = 0;
+        }
+        else if (Time.timeScale == 0)
+        {
+            _escPanel.SetActive(false);
+            Time.timeScale = 1;
+        }
     }
 }

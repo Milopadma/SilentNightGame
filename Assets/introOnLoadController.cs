@@ -11,15 +11,29 @@ public class introOnLoadController : MonoBehaviour
     public GameObject _GUI;
     private GameObject dialogueInstance;
     public string _dialogueText;
-    private bool next = false;
-    public bool isRun;
+    public bool isRun = false;
+    private string _returnedString;
 
+    GameObject _keepAlive;
 
     //when the scene loads, zoom the camera in, show the player getting up, zoom it out, show dialogue about the game, and then allow movement 
-    void Awake(){
+    void Start(){
+        //get the keepAliveInScenes script from MainManager GameObject
+        _keepAlive = GameObject.FindGameObjectWithTag("MainManager");
+        //reset
+        // _keepAlive.GetComponent<keepAliveInScenes>().AddData("isIntroFinished", "false");
+        //get data from _data Dictionary
+        _returnedString = _keepAlive.GetComponent<keepAliveInScenes>().GetData("isIntroFinished");
+        //turn _returnedString to bool
+        bool.TryParse(_returnedString, out bool isRun);
         if(!isRun){
             StartCoroutine(onLoad());
         }
+        else{
+            //set player position to near the door
+            _playerCharacter.transform.position = new Vector3(-0.98f, -3.35f, 0.077f); 
+        }
+
     }
 
     void Update()
@@ -58,6 +72,9 @@ public class introOnLoadController : MonoBehaviour
         yield return new WaitForSeconds(0.25f);
         showDialogueSimple(_dialogueText);
         isRun = true;
+        //add isRun to the keepAliveInScenes.cs Dictionary to prevent this script from running again
+        _keepAlive.GetComponent<keepAliveInScenes>().AddData("isIntroFinished", "true");
+
     }
     
     void showDialogueSimple(string _dialogueText)

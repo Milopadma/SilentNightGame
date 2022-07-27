@@ -6,7 +6,7 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance;
 
-    private void Awake(){
+    private void Awake(){ //stops duplicates
         if(LevelManager.instance == null) instance = this;
         else Destroy(gameObject);
     }

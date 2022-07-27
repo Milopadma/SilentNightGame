@@ -16,21 +16,44 @@ public class TimeController : MonoBehaviour
     public GameObject _globalLighting;
     private UnityEngine.Rendering.Universal.Light2D _light;
 
-    void Awake()
+    GameObject _keepAlive; //get the keepAliveInScences instance 
+    private string currentTime;
+
+    void Start()
     {
+        _keepAlive = GameObject.FindGameObjectWithTag("MainManager"); //find the keepAliveInScenes.cs 
         //get the global lighting
          _light = _globalLighting.GetComponent<UnityEngine.Rendering.Universal.Light2D>();
         //set the _time to _initialTime
-        _time = _initialTime;
+        // _time = _initialTime;
+        //check if theres currentTime data in the keepAliveInScenes.cs script
+        currentTime = _keepAlive.GetComponent<keepAliveInScenes>().GetData("currentTime");
+        if(currentTime != null)
+        {
+            //parse the returned string to a float of _time
+            _time = float.Parse(currentTime);
+            //*DEBUG*
+            Debug.Log("TimeController-- currentTimeNotNull - _time: " + _time);
+        }
+        else //if currentTime is null, its the first time the game is loaded
+        {
+            //add initialTime data to the keepAliveInScenes.cs script as currentTime for reference
+            _keepAlive.GetComponent<keepAliveInScenes>().AddData("currentTime", _initialTime.ToString());
+            currentTime = _keepAlive.GetComponent<keepAliveInScenes>().GetData("currentTime");
+            _time = float.Parse(currentTime);
+            //*DEBUG*
+            Debug.Log("TimeController-- currentTimeSet: " + currentTime);
+        }
+        //start the coroutine cycler for timetick updates per second
         StartCoroutine(cycler());
     }
 
-    void Update()
+    void Update() //update the GUI every frame
     {
         showTimeGUI();
     }
 
-    void TimeTick()
+    void TimeTick() //this just starts the time tick, makes sure hour is added when its 60 minutes, and light controls 
     {
         //stringify _time
         string timeString = _time.ToString("00.00");
@@ -90,11 +113,18 @@ public class TimeController : MonoBehaviour
         _TimeGUI.GetComponent<TextMeshProUGUI>().text = "Time: " + _time.ToString("0.00");
     }
 
-    IEnumerator cycler()
+    IEnumerator cycler() //this starts the time ticking
     {
-        while (true)
+        while(true)
         {
             TimeTick();
+            //everytime the time ticks, update the currentTime in the keepAliveInScenes.cs script
+            _keepAlive.GetComponent<keepAliveInScenes>().SetData("currentTime", _time.ToString());
+            Debug.Log("TimeController-- currentTimeincycler: " + _time);
+            //*DEBUGONLY!* just to see what the currentTime is according to Dictionary
+            currentTime = _keepAlive.GetComponent<keepAliveInScenes>().GetData("currentTime");
+            Debug.Log("TimeController-- DATAcurrentTimeinCycler: " + currentTime);
+            //*DEBUGONLY!*
             yield return new WaitForSeconds(1);
         }
     }

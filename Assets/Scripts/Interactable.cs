@@ -10,8 +10,8 @@ public class Interactable : MonoBehaviour
     public GameObject _interactButton; //the interact button
     public string _displayedDialogue; //the dialogue to be displayed
 
-    private GameObject interactInstance; //the instance of the interact button
-    private GameObject dialogueInstance; //the instance of the dialogue panel
+    public GameObject interactInstance; //the instance of the interact button
+    public GameObject dialogueInstance; //the instance of the dialogue panel
     public bool run = false; //whether the interact button should be displayed
 
     private string[] wordArray; //the array of words in the dialogue
@@ -120,8 +120,8 @@ public class Interactable : MonoBehaviour
     {
         if(_objectiveID != 0 && !_isInteracted)
         {
-            _isInteracted = true;
-            ObjectiveController.instance.nextObjective();
+            _isInteracted = true; //this finishes the objective when the player interacts with this instance of interactible
+            ObjectiveController.instance.nextObjective(); //calls nextObjective() in ObjectiveController.cs
         }
         else
         {
