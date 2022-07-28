@@ -22,6 +22,8 @@ public class Interactable : MonoBehaviour
     public int _objectiveID; //if an interactible has an objectiveID, when user interacts with it, it will call nextObjective() in ObjectiveController.cs
     public bool _isInteracted = false; //whether this instance of interactible has been interacted with
 
+    public string _thisObjectiveText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -121,7 +123,8 @@ public class Interactable : MonoBehaviour
         if(_objectiveID != 0 && !_isInteracted)
         {
             _isInteracted = true; //this finishes the objective when the player interacts with this instance of interactible
-            ObjectiveController.instance.nextObjective(); //calls nextObjective() in ObjectiveController.cs
+            // ObjectiveController.instance.nextObjective(); //calls nextObjective() in ObjectiveController.cs
+            ObjectiveController.instance.setObjective(_thisObjectiveText);
         }
         else
         {

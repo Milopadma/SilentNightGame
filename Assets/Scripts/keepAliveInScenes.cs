@@ -91,6 +91,7 @@
      {
         //reseet Dictionary
         _data.Clear();
+        Debug.Log("keepAliveInScenes-- Dictionary Cleared");
          DontDestroyOnLoad(this.gameObject);
  
          // subscribe to the scene load callback

@@ -74,6 +74,8 @@ public class introOnLoadController : MonoBehaviour
         isRun = true;
         //add isRun to the keepAliveInScenes.cs Dictionary to prevent this script from running again
         _keepAlive.GetComponent<keepAliveInScenes>().AddData("isIntroFinished", "true");
+        GameObject tipText = GameObject.FindGameObjectWithTag("TipText");
+        tipText.GetComponent<TipTextController>().__showOnTipText("Tip: Items with an exclamation mark can be interaced with.");
 
     }
     

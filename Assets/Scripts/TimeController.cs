@@ -32,17 +32,10 @@ public class TimeController : MonoBehaviour
         {
             //parse the returned string to a float of _time
             _time = float.Parse(currentTime);
-            //*DEBUG*
-            Debug.Log("TimeController-- currentTimeNotNull - _time: " + _time);
         }
         else //if currentTime is null, its the first time the game is loaded
         {
-            //add initialTime data to the keepAliveInScenes.cs script as currentTime for reference
-            _keepAlive.GetComponent<keepAliveInScenes>().AddData("currentTime", _initialTime.ToString());
-            currentTime = _keepAlive.GetComponent<keepAliveInScenes>().GetData("currentTime");
-            _time = float.Parse(currentTime);
-            //*DEBUG*
-            Debug.Log("TimeController-- currentTimeSet: " + currentTime);
+            StartCoroutine(__initializeTime());
         }
         //start the coroutine cycler for timetick updates per second
         StartCoroutine(cycler());
@@ -99,7 +92,6 @@ public class TimeController : MonoBehaviour
         if (_minutes > 60)
         {
             //increment _time by 1
-            Debug.Log("Time added");
             //reset timeCheck to 0
             _minutes = 0;
             return _time = _hour + 1 + _minutes;
@@ -120,13 +112,16 @@ public class TimeController : MonoBehaviour
             TimeTick();
             //everytime the time ticks, update the currentTime in the keepAliveInScenes.cs script
             _keepAlive.GetComponent<keepAliveInScenes>().SetData("currentTime", _time.ToString());
-            Debug.Log("TimeController-- currentTimeincycler: " + _time);
-            //*DEBUGONLY!* just to see what the currentTime is according to Dictionary
-            currentTime = _keepAlive.GetComponent<keepAliveInScenes>().GetData("currentTime");
-            Debug.Log("TimeController-- DATAcurrentTimeinCycler: " + currentTime);
-            //*DEBUGONLY!*
             yield return new WaitForSeconds(1);
         }
+    }
+    IEnumerator __initializeTime()
+    {
+        yield return new WaitForSeconds(0.25f); //since keepAliveInScenes wipes the dictionary when it starts, wait a bit for it to load before initializing Time
+        //add initialTime data to the keepAliveInScenes.cs script as currentTime for reference
+        _keepAlive.GetComponent<keepAliveInScenes>().AddData("currentTime", _initialTime.ToString());
+        currentTime = _keepAlive.GetComponent<keepAliveInScenes>().GetData("currentTime");
+        _time = float.Parse(currentTime);
     }
 
 }
