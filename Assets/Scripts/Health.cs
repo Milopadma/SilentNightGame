@@ -21,7 +21,6 @@ public class Health : MonoBehaviour
     {
         if (amount < 0) {throw new System.ArgumentOutOfRangeException("Cannot have negative Damage");}
         this.health = health - amount;
-        Debug.Log("(player)damaged by: " + amount);
         healthBar.SetHealthBar(health, MAX_HEALTH); //just for the healthbar display
         StartCoroutine(DamageFlash());
     }

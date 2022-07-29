@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b951d6c802afa0f4f9923c95df41fae9, type: 3}
-  m_Name: EnemyType1
+  m_Script: {fileID: 11500000, guid: 381e38629eb76b94eb685b3a965231c7, type: 3}
+  m_Name: enemyType1
   m_EditorClassIdentifier: 
   hp: 100
   damage: 10
   speed: 2
+  __enemyRange: 5

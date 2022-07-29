@@ -16,14 +16,17 @@ public class TimeController : MonoBehaviour
     public GameObject _globalLighting;
     private UnityEngine.Rendering.Universal.Light2D _light;
 
-    GameObject _keepAlive; //get the keepAliveInScences instance 
+    GameObject _keepAlive; //get the keepAliveInScenes instance 
     private string currentTime;
 
     void Start()
     {
         _keepAlive = GameObject.FindGameObjectWithTag("MainManager"); //find the keepAliveInScenes.cs 
+        
         //get the global lighting
+        //! this needs to be consistent between scenes
          _light = _globalLighting.GetComponent<UnityEngine.Rendering.Universal.Light2D>();
+        
         //set the _time to _initialTime
         // _time = _initialTime;
         //check if theres currentTime data in the keepAliveInScenes.cs script

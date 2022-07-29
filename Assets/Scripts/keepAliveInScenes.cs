@@ -1,72 +1,3 @@
-// // using System.Collections;
-// using System.Collections.Generic;
-// using UnityEngine;
-// using UnityEngine.SceneManagement;
-
-// //place this into gameObjects to keep them alive in multiple scenes
-// public class keepAliveInScenes : MonoBehaviour
-// {
-//     public List<string> _sceneNames;
-//     public string _instanceName;
-
-//     //data to keep track between scenes
-//     public static Dictionary<string, bool> _data = new Dictionary<string, bool>();
-
-
-//     private void Start()
-//     {
-//         DontDestroyOnLoad(this.gameObject);
-//         SceneManager.sceneLoaded += OnSceneLoaded;
-//     }
-
-//     //add data to the dictionary
-//     public void AddData(string key, bool value)
-//     {
-//         if (!_data.ContainsKey(key)){_data.Add(key, value);}
-//     }
-
-//     //get data from the dictionary
-//     public string GetData(string key)
-//     {
-//         if (_data.ContainsKey(key)){return _data[key].ToString();}
-//         else return null;
-//     }
-
-//     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-//     {
-//         //check for duplicate Instances
-//         checkDuplicateInstances();
-//         //checkIfSceneIsValid
-//         checkIfSceneIsValid();
-//     }
-    
-//     void checkDuplicateInstances()
-//     {
-//         keepAliveInScenes[] collection = FindObjectsOfType<keepAliveInScenes>();
-//         foreach (keepAliveInScenes obj in collection)
-//         {
-//             if(obj._instanceName == _instanceName)
-//             {
-//                 Debug.Log("keepAliveInScenes-- Duplicate Instance Found, Deleting!");
-//                 DestroyImmediate(obj.gameObject);
-//             }
-//         }
-//     }
-    
-//     void checkIfSceneIsValid()
-//     {
-//         string _currentScene = SceneManager.GetActiveScene().name; //get the name of the current scene
-//         if(_sceneNames.Contains(_currentScene))
-//         {
-//             //do nothing
-//         }
-//         else
-//         {
-//             SceneManager.sceneLoaded -= OnSceneLoaded; //remove the event listener
-//             DestroyImmediate(this.gameObject);
-//         }
-//     }
-// }
  using System.Collections.Generic;
  using UnityEngine;
  using UnityEngine.SceneManagement;
@@ -91,7 +22,7 @@
      {
         //reseet Dictionary
         _data.Clear();
-        Debug.Log("keepAliveInScenes-- Dictionary Cleared");
+        Debug.Log("(GAME STARTED)keepAliveInScenes.cs -- Dictionary Cleared");
          DontDestroyOnLoad(this.gameObject);
  
          // subscribe to the scene load callback
@@ -152,7 +83,7 @@
      public string GetData(string key)
      {
          if (_data.ContainsKey(key)){return _data[key].ToString();}
-         else return null;
+         else {return null;}
      }
 
      public void SetData(string key, string value)

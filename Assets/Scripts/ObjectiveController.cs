@@ -25,8 +25,6 @@ public class ObjectiveController : MonoBehaviour
         _returnedString = _keepAlive.GetComponent<keepAliveInScenes>().GetData("objectiveIndex");
         if(_returnedString != null) //if its not null
         {
-            //*Debug
-            Debug.Log("ObjectiveController--NOTNULL _returnedString: " + _returnedString);
             //parse the returned string to an int
             // _index = int.Parse(_returnedString);
             //set the _objText to the current objective
@@ -55,9 +53,6 @@ public class ObjectiveController : MonoBehaviour
         _objText = _keepAlive.GetComponent<keepAliveInScenes>().GetData("objective");
         //show the objective text in GUI HUD
         this.GetComponent<TextMeshProUGUI>().text = _objText;
-        //*debug
-        Debug.Log("ObjectiveController--showObjectiveText() _objText: " + _objText);
-
     }
 
     //this public function is called whenever an interactible has an objective assigned to it
@@ -65,8 +60,6 @@ public class ObjectiveController : MonoBehaviour
     {
         //set the objective in the keepAliveInScenes.cs
         _keepAlive.GetComponent<keepAliveInScenes>().SetData("objective", _objective);
-        //*Debug
-        Debug.Log("ObjectiveController--setObjective: " + _objective);
         showObjectiveText();
     }
 
@@ -77,10 +70,6 @@ public class ObjectiveController : MonoBehaviour
         _objText = "Press 'E' to interact with objects"; 
         _keepAlive.GetComponent<keepAliveInScenes>().AddData("objective", _objText);
         showObjectiveText();
-     
-        //*debug
-        _returnedString = _keepAlive.GetComponent<keepAliveInScenes>().GetData("objective");
-        Debug.Log("ObjectiveController--NULL _returnedString: " + _returnedString);
     }
 
     // public void nextObjective() //this is only called AFTER an objective is completed
