@@ -1,13 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Tilemaps;
 
 //this controls all audio about the player (footsteps, interact)
 public class PlayerAudioController : MonoBehaviour
 {
     [SerializeField] private AudioClip[] _footstepSounds;
     [SerializeField] private AudioClip _interactSound;
+    [SerializeField] private AudioClip[] _dashSound;
+    [SerializeField] private AudioClip _flashLightToggleSound;
+    private AudioSource _audio;
+
+    private bool alreadyPlayed = false;
+    private float stepCooldown;
+    private float stepRate = 0.3f; 
+
+    private string _tileNameString;
 
     void Start()
     {
@@ -18,38 +27,62 @@ public class PlayerAudioController : MonoBehaviour
     //check if the player is moving
     void Update()
     {
-        if(Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0){
+        stepCooldown -= Time.deltaTime;
+        if((Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) && stepCooldown < 0f){
+        //get the tilemap
+        Tilemap _tilemap = GameObject.FindGameObjectWithTag("TileMap").GetComponent<Tilemap>();
+        Sprite _tileName = _tilemap.GetSprite(_tilemap.WorldToCell(transform.position));
+        //parse _tileMap to string
+        _tileNameString = _tileName.ToString();
+            //play the footstep sound
             PlayFootstepSound();
-        } else {
-            return;
+
+            //*Debug
+            Debug.Log("played");
+            stepCooldown = stepRate;
         }
     }
 
     //tilemap checker
     public void PlayFootstepSound()
     {
-        //get the tilemap
-        Tilemap _tilemap = GameObject.FindGameObjectWithTag("Tilemap").GetComponent<Tilemap>();
-        //get the tilemap layer
-        TilemapLayer _layer = _tilemap.GetLayer("Ground");
-        //get the tilemap layer tile
-        TileBase _tile = _layer.GetTile(new Vector3Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y), 0));
-        //get the tilemap layer tile name
-        string _tileName = _tile.name;
+        Debug.Log(_tileNameString);
         //check if the tile is a wood tile
-        if(_tileName.Contains("interior free_21")){
-            //play the wood footstep sound
-            _audio.PlayOneShot(_footstepSounds[0]);
+        if(_tileNameString.Contains("interior free_21")){
+            //play the wood footstep sound by selecting a random number between 0 and 2
+            _audio.PlayOneShot(_footstepSounds[Random.Range(0, 2)]);
+            // _audio.Play();
+
+            //*Debug
+            Debug.Log(_tileNameString);
+            stepCooldown = stepRate;
         }
-        //check if the tile is a grass tile
-        if(_tileName.Contains("Grass")){
-            //play the grass footstep sound
-            _audio.PlayOneShot(_footstepSounds[1]);
+        if(_tileNameString.Contains("interior free_22")){
+            //play the carpet footstep sound by selecting a random number between 3 and 5
+            _audio.PlayOneShot(_footstepSounds[Random.Range(3, 5)]);
+            // _audio.Play();
+
+            //*Debug
+            Debug.Log(_tileNameString);
+            stepCooldown = stepRate;
         }
-        //check if the tile is a road tile
-        if(_tileName.Contains("Stone")){
-            //play the road footstep sound
-            _audio.PlayOneShot(_footstepSounds[2]);
+        if(_tileNameString.Contains("Stone")){
+            //play the stone footstep sound by selecting a random number between 6 and 8
+            _audio.PlayOneShot(_footstepSounds[Random.Range(6, 8)]);
+            // _audio.Play();
+
+            //*Debug
+            Debug.Log(_tileNameString);
+            stepCooldown = stepRate;
+        }
+        if(_tileNameString.Contains("Grass")){
+            //play the grass footstep sound by selecting a random number between 9 to 11
+            _audio.PlayOneShot(_footstepSounds[Random.Range(9, 11)]);
+            // _audio.Play();
+
+            //*Debug
+            Debug.Log(_tileNameString);
+            stepCooldown = stepRate;
         }
     }
 
@@ -57,5 +90,17 @@ public class PlayerAudioController : MonoBehaviour
     public void PlayInteractSound()
     {
         _audio.PlayOneShot(_interactSound);
+    }
+
+    //play the dash sound
+    public void PlayDashSound()
+    {
+        _audio.PlayOneShot(_dashSound[Random.Range(0, 1)]);
+    }
+
+    //play teh flashlight toggle sound
+    public void PlayFlashLightToggleSound()
+    {
+        _audio.PlayOneShot(_flashLightToggleSound);
     }
 }

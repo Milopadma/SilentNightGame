@@ -89,6 +89,8 @@ public class Interactable : MonoBehaviour
         dialogueInstance.GetComponentInChildren<TextMeshProUGUI>().text = _displayedDialogue;
         //set this gameObject parent GUI
         dialogueInstance.transform.SetParent(GameObject.Find("GUI").transform);
+        //play the PlayInteractSound from PlayerAudioController.cs
+        _player.GetComponent<PlayerAudioController>().PlayInteractSound();
     }
 
     //method to return an instantiated gameObject

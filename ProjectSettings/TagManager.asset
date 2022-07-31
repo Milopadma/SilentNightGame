@@ -9,6 +9,8 @@ TagManager:
   - Flashlight
   - TipText
   - MainManager
+  - TileMap
+  - gameVolSlider
   layers:
   - Default
   - TransparentFX

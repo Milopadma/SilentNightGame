@@ -111,6 +111,8 @@ public class PlayerMovementController : MonoBehaviour
         //beforedash
         canDash = false;
         isDashing = true;
+        //call playDashSound from PlayerAudioController
+        GetComponent<PlayerAudioController>().PlayDashSound();
         tr.emitting = true;
         yield return new WaitForSeconds(dashingTime);
         //after dash

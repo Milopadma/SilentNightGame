@@ -952,6 +952,8 @@ MonoBehaviour:
   _ForestMusic: {fileID: 8300000, guid: 926de0017e9197246b7b063d65bf0134, type: 3}
   _HouseMusic: {fileID: 8300000, guid: b8428aa23b282b143a77c01f28f6fea0, type: 3}
   _CreditsMusic: {fileID: 8300000, guid: 47490ccd4e5cefc4baa334753f0ae163, type: 3}
+  _volume: 0.5
+  _volumeSlider: {fileID: 0}
 --- !u!82 &1532176538
 AudioSource:
   m_ObjectHideFlags: 0
@@ -964,7 +966,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.125
   m_Pitch: 1
   Loop: 1
   Mute: 0
