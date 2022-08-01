@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//signed //I GUSTI BAGUS MILO PADMA WIJAYA 
 
 //this script is attached to the enemy prefab
 //script taken from one of my other games, so some of the variables may not be used
@@ -17,9 +18,15 @@ public class Enemy : MonoBehaviour
     private bool canTakeDamage = true;
     private GameObject player;
 
+    private Animator animator;
+
+    private Vector3 _prevPos;
+    private Vector3 _currentDirection;
+
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
         SetEnemyValues();
     }
@@ -39,6 +46,8 @@ public class Enemy : MonoBehaviour
 
 
         DamagePlayerCheck();
+
+        // MovementAnimations();
     }
 
     private void SetEnemyValues()
@@ -53,6 +62,9 @@ public class Enemy : MonoBehaviour
     private void Swarm()
     {
         transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+        animator.SetBool("IsMoving", true);
+        animator.SetFloat("MoveX", (player.transform.position.x - transform.position.x));
+        animator.SetFloat("MoveY", (player.transform.position.y - transform.position.y));
     }
     private void DamagePlayerCheck()
     {
@@ -75,7 +87,7 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator Patrol()
     {
-        transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x + Random.Range(-10f, 10f), transform.position.y + Random.Range(-10f, 10f), transform.position.z), speed / 2 * Time.deltaTime);
+        // transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x + Random.Range(-10f, 10f), transform.position.y + Random.Range(-10f, 10f), transform.position.z), speed / 2 * Time.deltaTime);
         yield return new WaitForSeconds(5f);
     }
 

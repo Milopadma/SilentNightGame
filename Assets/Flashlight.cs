@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//what does this do?
+//signed //I GUSTI BAGUS MILO PADMA WIJAYA 
+
 //on start, check if it was pickedup already or not, if not then just keep checking
 public class Flashlight : MonoBehaviour
 {

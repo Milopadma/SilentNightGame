@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+//signed //I GUSTI BAGUS MILO PADMA WIJAYA 
 
 public class StateManager : MonoBehaviour
 {
