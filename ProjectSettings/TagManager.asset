@@ -11,6 +11,7 @@ TagManager:
   - MainManager
   - TileMap
   - gameVolSlider
+  - settingsButtons
   layers:
   - Default
   - TransparentFX

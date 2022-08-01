@@ -54,7 +54,8 @@ public class PlayerMovementController : MonoBehaviour
                 dir.x = -1;
                 dir.Normalize();
                 transform.localScale = new Vector3(1, 1, 1);
-                animator.CrossFade("sideWalk", 0);
+                // animator.CrossFade("sideWalk", 0);
+                PlayAnimation();
             }
         }
 
@@ -68,7 +69,8 @@ public class PlayerMovementController : MonoBehaviour
                 dir.Normalize();
                 //flip the sprite 
                 transform.localScale = new Vector3(-1, 1, 1);
-                animator.CrossFade("sideWalk", 0);
+                // animator.CrossFade("sideWalk", 0);
+                PlayAnimation();
             }
         }
 
@@ -80,7 +82,8 @@ public class PlayerMovementController : MonoBehaviour
             else{
                 dir.y = 1;
                 dir.Normalize();
-                animator.CrossFade("upWalk", 0);
+                // animator.CrossFade("upWalk", 0);
+                PlayAnimation();
             }
         }
         else if (Input.GetKey(KeyCode.S))
@@ -91,7 +94,8 @@ public class PlayerMovementController : MonoBehaviour
             else{
                 dir.y = -1;
                 dir.Normalize();
-                animator.CrossFade("downWalk", 0);
+                // animator.CrossFade("downWalk", 0);
+                PlayAnimation();
             }
         }
         //if player is not moving, play idle animation
@@ -150,5 +154,48 @@ public class PlayerMovementController : MonoBehaviour
             _escPanel.SetActive(false);
             Time.timeScale = 1;
         }
+    }
+
+    private void PlayAnimation()
+    {
+        // animator.CrossFade(animationName, 0);
+        //when player is moving at an angle, play the sideWalk animation
+        if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.W))
+        {
+            animator.CrossFade("sideWalk", 0);
+        }
+        else if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.S))
+        {
+            animator.CrossFade("sideWalk", 0);
+        }
+        else if (Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.W))
+        {
+            animator.CrossFade("sideWalk", 0);
+        }
+        else if (Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.S))
+        {
+            animator.CrossFade("sideWalk", 0);
+        }
+        //else, play the animation based on the direction the player is moving
+        else
+        {
+            if (Input.GetKey(KeyCode.A))
+            {
+                animator.CrossFade("sideWalk", 0);
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                animator.CrossFade("sideWalk", 0);
+            }
+            else if (Input.GetKey(KeyCode.W))
+            {
+                animator.CrossFade("upWalk", 0);
+            }
+            else if (Input.GetKey(KeyCode.S))
+            {
+                animator.CrossFade("downWalk", 0);
+            }
+        }
+
     }
 }

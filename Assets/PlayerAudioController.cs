@@ -10,6 +10,8 @@ public class PlayerAudioController : MonoBehaviour
     [SerializeField] private AudioClip _interactSound;
     [SerializeField] private AudioClip[] _dashSound;
     [SerializeField] private AudioClip _flashLightToggleSound;
+    [SerializeField] private AudioClip _tipTextSound;
+    [SerializeField] private AudioClip _playerHurt;
     private AudioSource _audio;
 
     private bool alreadyPlayed = false;
@@ -102,5 +104,13 @@ public class PlayerAudioController : MonoBehaviour
     public void PlayFlashLightToggleSound()
     {
         _audio.PlayOneShot(_flashLightToggleSound);
+    }
+    public void PlayTipTextSound()
+    {
+        _audio.PlayOneShot(_tipTextSound);
+    }
+    public void PlayPlayerHurtSound()
+    {
+        _audio.PlayOneShot(_playerHurt);
     }
 }

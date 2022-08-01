@@ -49,6 +49,8 @@ public class Health : MonoBehaviour
         this.health = health - amount;
         //also update the health after damaged in Dictionary
         _keepAlive.SetData("health", this.health.ToString());
+        //play PlayPLayerHurtSound from PlayerAudioController.cs
+        GetComponent<PlayerAudioController>().PlayPlayerHurtSound();
         //check if healthBar object still active
         StartCoroutine(DamageFlash());
     }

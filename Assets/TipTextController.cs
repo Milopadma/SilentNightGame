@@ -29,6 +29,8 @@ public class TipTextController : MonoBehaviour
     IEnumerator playTipTextAnimations() //show tipTextShow animation clip and after 8 seconds, play tipTextShow animation clip
     {
         _anim.Play("tipTextShow");
+        //play the tipTextSound from PlayerAudioController.cs
+        GetComponent<PlayerAudioController>().PlayTipTextSound();
         yield return new WaitForSeconds(8);
         _anim.Play("tipTextHide");
         yield return new WaitForSeconds(1);

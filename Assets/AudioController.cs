@@ -15,31 +15,34 @@ public class AudioController : MonoBehaviour
     [SerializeField] AudioClip _ForestMusic;
     [SerializeField] AudioClip _HouseMusic;
     [SerializeField] AudioClip _CreditsMusic;
-    [SerializeField, Range(0f, 1f)] float _volume = 0.5f;
+    [SerializeField, Range(0f, 1f)] float _volume = 0.125f;
     private Slider _volumeSlider;
 
     private void Start(){
         SceneManager.sceneLoaded += OnSceneLoaded;
         PlayMusic(_MainMenuMusic);
 
-        //check if settingsButton is active
-        if(GameObject.Find("settingsButtons") != null){
 
-            //get the volume slider
-            _volumeSlider = GameObject.Find("gameVol").GetComponent<Slider>();
-            
-            //set the volume slider to the current volume
-            _volumeSlider.value = _volume;
-            
-            //disable the settingsButton
-            GameObject.Find("settingsButtons").SetActive(false); 
-        }
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode){
         Debug.Log("OnSceneLoaded: " + scene.name);
         Debug.Log(mode);
         //check what scene we are in and play the appropriate music
+        if(SceneManager.GetActiveScene().name == "MainMenu"){
+        //check if settingsButton is active
+        if(GameObject.FindGameObjectWithTag("settingsButtons") != null){
+
+            //get the volume slider
+            _volumeSlider = GameObject.FindGameObjectWithTag("gameVolSlider").GetComponent<Slider>();
+
+            //set the volume slider to the current volume
+            _volume = _volumeSlider.value;
+            
+            //disable the settingsButton
+            GameObject.FindGameObjectWithTag("settingsButtons").SetActive(false); 
+        }
+        }
         if(SceneManager.GetActiveScene().name == "Level_1"){
             PlayMusic(_BarMusic);
         }
@@ -55,6 +58,8 @@ public class AudioController : MonoBehaviour
         if(SceneManager.GetActiveScene().name == "Credits"){
             PlayMusic(_CreditsMusic);
         }
+
+
     }
 
     //play the music
@@ -74,7 +79,6 @@ public class AudioController : MonoBehaviour
     {
         //check if the current scene is MainMenu
         if(SceneManager.GetActiveScene().name == "MainMenu"){
-            _volumeSlider = GameObject.FindGameObjectWithTag("gameVolSlider").GetComponent<Slider>();
             //set the volume of the audio source to the volume
             GetComponent<AudioSource>().volume = _volume;
             //check if the volume slider is not null
