@@ -140,16 +140,13 @@ public class Flashlight : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         //play PlayFlashLightToggleSound from PlayerAudioController.cs
         _player.GetComponent<PlayerAudioController>().PlayFlashLightToggleSound();
-        //*Debug
         if(isOn == false) //if flashlight is off (false)
         {
-            Debug.Log("Flashlight is toggled " + isOn);
             _light.intensity = _intensityValue;
             _keepAlive.GetComponent<keepAliveInScenes>().SetData("flashlightisOn", "true");
         }
         else if (isOn == true)
         {
-            Debug.Log("Flashlight is toggled " + isOn);
             _light.intensity = 0;
             _keepAlive.GetComponent<keepAliveInScenes>().SetData("flashlightisOn", "false");
         }
@@ -159,7 +156,6 @@ public class Flashlight : MonoBehaviour
     private bool toggleChecker()
     {
         string isOnReturnString = _keepAlive.GetComponent<keepAliveInScenes>().GetData("flashlightisOn"); 
-        Debug.Log("isOnReturnString: " + isOnReturnString);
         if (isOnReturnString == "true")
         {
             return true;

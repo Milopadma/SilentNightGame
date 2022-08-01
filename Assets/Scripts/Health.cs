@@ -23,7 +23,6 @@ public class Health : MonoBehaviour
         {
             //parse the returned string to a float of health
             health = int.Parse(healthData);
-            Debug.Log("healthData is not null and is " + healthData);
         }
         else //if healthData is null, its the first time the game is loaded
         {
@@ -35,7 +34,6 @@ public class Health : MonoBehaviour
     {
         health = MAX_HEALTH;
         _keepAlive.AddData("health", health.ToString());
-        Debug.Log("healthData is null and is " + health);
     }
 
     // public void SetHealth(int maxHealth, int health)
@@ -93,7 +91,6 @@ public class Health : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("Player Died");
         LevelManager.instance.GameOver(); //get the instance of LevelManager and call GameOver()
         gameObject.SetActive(false);
         //reset player health in Dictionary

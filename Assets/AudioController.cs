@@ -27,8 +27,6 @@ public class AudioController : MonoBehaviour
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode){
-        Debug.Log("OnSceneLoaded: " + scene.name);
-        Debug.Log(mode);
         //check what scene we are in and play the appropriate music
         if(SceneManager.GetActiveScene().name == "MainMenu"){
         //check if settingsButton is active

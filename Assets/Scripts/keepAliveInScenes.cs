@@ -2,6 +2,10 @@
  using UnityEngine;
  using UnityEngine.SceneManagement;
  
+ //the basis of this script was taken from keszeial, link to their post is in the credits scene and https://answers.unity.com/questions/1260393/make-music-continue-playing-through-scenes.html
+ //the dictionary functionality is mine
+ //signed //I GUSTI BAGUS MILO PADMA WIJAYA
+ 
  /// <summary>
  /// Attach this component to objects that you want to keep alive (e.g. theme songs) in certain scene transitions. 
  /// For reusability, this component uses the scene names as strings to decide whether it survives or not after a scene is loaded 

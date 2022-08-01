@@ -15,7 +15,6 @@ public class PlayerAudioController : MonoBehaviour
     [SerializeField] private AudioClip _playerHurt;
     private AudioSource _audio;
 
-    private bool alreadyPlayed = false;
     private float stepCooldown;
     private float stepRate = 0.3f; 
 
@@ -39,52 +38,31 @@ public class PlayerAudioController : MonoBehaviour
         _tileNameString = _tileName.ToString();
             //play the footstep sound
             PlayFootstepSound();
-
-            //*Debug
-            Debug.Log("played");
-            stepCooldown = stepRate;
         }
     }
 
     //tilemap checker
     public void PlayFootstepSound()
     {
-        Debug.Log(_tileNameString);
         //check if the tile is a wood tile
         if(_tileNameString.Contains("interior free_21")){
             //play the wood footstep sound by selecting a random number between 0 and 2
             _audio.PlayOneShot(_footstepSounds[Random.Range(0, 2)]);
-            // _audio.Play();
-
-            //*Debug
-            Debug.Log(_tileNameString);
             stepCooldown = stepRate;
         }
         if(_tileNameString.Contains("interior free_22")){
             //play the carpet footstep sound by selecting a random number between 3 and 5
             _audio.PlayOneShot(_footstepSounds[Random.Range(3, 5)]);
-            // _audio.Play();
-
-            //*Debug
-            Debug.Log(_tileNameString);
             stepCooldown = stepRate;
         }
         if(_tileNameString.Contains("Stone")){
             //play the stone footstep sound by selecting a random number between 6 and 8
             _audio.PlayOneShot(_footstepSounds[Random.Range(6, 8)]);
-            // _audio.Play();
-
-            //*Debug
-            Debug.Log(_tileNameString);
             stepCooldown = stepRate;
         }
         if(_tileNameString.Contains("Grass")){
             //play the grass footstep sound by selecting a random number between 9 to 11
             _audio.PlayOneShot(_footstepSounds[Random.Range(9, 11)]);
-            // _audio.Play();
-
-            //*Debug
-            Debug.Log(_tileNameString);
             stepCooldown = stepRate;
         }
     }

@@ -9,6 +9,7 @@ public class TipTextController : MonoBehaviour
     private string _tip;
     private Animator _anim;
     TextMeshProUGUI _thisText;
+    private PlayerAudioController _playerAudioController;
     //other gameObjects can call on an instance of this script and show it in this gameObject's TextMeshPro component
 
     void Awake()
@@ -17,6 +18,7 @@ public class TipTextController : MonoBehaviour
         _anim = GetComponent<Animator>();
         //hide the tip text by setting text Alpha to 0
         _thisText = this.GetComponent<TextMeshProUGUI>();
+        _playerAudioController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAudioController>();
     }
 
     public void __showOnTipText(string _tip)
@@ -31,7 +33,7 @@ public class TipTextController : MonoBehaviour
     {
         _anim.Play("tipTextShow");
         //play the tipTextSound from PlayerAudioController.cs
-        GetComponent<PlayerAudioController>().PlayTipTextSound();
+        _playerAudioController.PlayTipTextSound();
         yield return new WaitForSeconds(8);
         _anim.Play("tipTextHide");
         yield return new WaitForSeconds(1);
