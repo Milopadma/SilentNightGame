@@ -21,7 +21,10 @@ public class AudioController : MonoBehaviour
 
     private void Start(){
         SceneManager.sceneLoaded += OnSceneLoaded;
+        //play _mainMenuMusic on a loop
+
         PlayMusic(_MainMenuMusic);
+        __initializeMainMenu();
 
 
     }
@@ -29,18 +32,18 @@ public class AudioController : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode){
         //check what scene we are in and play the appropriate music
         if(SceneManager.GetActiveScene().name == "MainMenu"){
-        //check if settingsButton is active
-        if(GameObject.FindGameObjectWithTag("settingsButtons") != null){
+            //check if settingsButton is active
+            if(GameObject.FindGameObjectWithTag("settingsButtons") != null){
 
-            //get the volume slider
-            _volumeSlider = GameObject.FindGameObjectWithTag("gameVolSlider").GetComponent<Slider>();
+                //get the volume slider
+                _volumeSlider = GameObject.FindGameObjectWithTag("gameVolSlider").GetComponent<Slider>();
 
-            //set the volume slider to the current volume
-            _volume = _volumeSlider.value;
-            
-            //disable the settingsButton
-            GameObject.FindGameObjectWithTag("settingsButtons").SetActive(false); 
-        }
+                //set the volume slider to the current volume
+                _volume = _volumeSlider.value;
+                
+                //disable the settingsButton
+                GameObject.FindGameObjectWithTag("settingsButtons").SetActive(false); 
+            }
         }
         if(SceneManager.GetActiveScene().name == "Level_1"){
             PlayMusic(_BarMusic);
@@ -66,6 +69,7 @@ public class AudioController : MonoBehaviour
     {
         AudioSource _audio = GetComponent<AudioSource>(); //get the audio source
         _audio.clip = clip; //set the audio source clip to the clip
+        _audio.loop = true;
         _audio.Play(); //play the audio source
     }
 
@@ -86,6 +90,23 @@ public class AudioController : MonoBehaviour
                 _volume = _volumeSlider.value;
             }
         }
-
     }
+
+    void __initializeMainMenu(){
+                //check what scene we are in and play the appropriate music
+        if(SceneManager.GetActiveScene().name == "MainMenu"){
+            //check if settingsButton is active
+            if(GameObject.FindGameObjectWithTag("settingsButtons") != null){
+
+                //get the volume slider
+                _volumeSlider = GameObject.FindGameObjectWithTag("gameVolSlider").GetComponent<Slider>();
+
+                //set the volume slider to the current volume
+                _volume = _volumeSlider.value;
+                
+                //disable the settingsButton
+                GameObject.FindGameObjectWithTag("settingsButtons").SetActive(false); 
+            }
+    }
+}
 }

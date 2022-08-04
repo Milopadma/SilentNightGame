@@ -12,7 +12,7 @@ public class StateManager : MonoBehaviour
 
     public void ChangeSceneByName(string name){
         if(name != null){
-        SceneManager.LoadScene(name);
+        SceneManager.LoadSceneAsync(name);
         }
     }
 }

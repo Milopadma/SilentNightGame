@@ -67,6 +67,9 @@ public class Flashlight : MonoBehaviour
                 __loadFlashlight(); 
                 _isRun = true;
                 _keepAlive.GetComponent<keepAliveInScenes>().SetData("hasFlashlight", "true");
+
+                StartCoroutine(__disableInteraction());
+
             }
         }
     }
@@ -165,6 +168,18 @@ public class Flashlight : MonoBehaviour
             return false;
         }
         return true;
+    }
+
+
+    private IEnumerator __disableInteraction()
+    {
+        //this is done to fix the bug where the E button can be seen above the player when the player respawns. 
+        //wait 8 seconds 
+        yield return new WaitForSeconds(8f);
+        //disable pickupable.cs and interactible.cs component of this gameobject
+        GetComponent<Pickupable>().enabled = false;
+        // GetComponent<Interactable>().enabled = false;
+        yield return null;
     }
 }
 //note. functions with double underlines implies it should only be run once and never interacted by Update();
