@@ -915,7 +915,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 290.47015, y: -59.4}
+  m_AnchoredPosition: {x: 290.47015, y: -39.1}
   m_SizeDelta: {x: 496.82, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &473972084
@@ -938,7 +938,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: bug testing/recommendations
+  m_text: user persona
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08a815d0fcf8730439f0a73c02090872, type: 2}
   m_sharedMaterial: {fileID: 8875990532998866636, guid: 08a815d0fcf8730439f0a73c02090872,
@@ -2500,7 +2500,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: https://pastebin.com/XKtwphXr
+  m_text: user persona
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08a815d0fcf8730439f0a73c02090872, type: 2}
   m_sharedMaterial: {fileID: 8875990532998866636, guid: 08a815d0fcf8730439f0a73c02090872,
@@ -3477,7 +3477,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -30, y: -56.699944}
+  m_AnchoredPosition: {x: -25, y: -36.8}
   m_SizeDelta: {x: 613.88, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1292818324
@@ -3714,7 +3714,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -128, y: -11.849991}
+  m_AnchoredPosition: {x: -119, y: -11.849991}
   m_SizeDelta: {x: 613.88, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1307028505
@@ -3737,7 +3737,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: u/jerlovescake
+  m_text: Mahesa konrad
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08a815d0fcf8730439f0a73c02090872, type: 2}
   m_sharedMaterial: {fileID: 8875990532998866636, guid: 08a815d0fcf8730439f0a73c02090872,
@@ -4505,7 +4505,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -64, y: -24.1}
+  m_AnchoredPosition: {x: -126, y: -24.1}
   m_SizeDelta: {x: 613.88, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1653039447
@@ -4528,7 +4528,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: keszeial
+  m_text: yaroslav orlov
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08a815d0fcf8730439f0a73c02090872, type: 2}
   m_sharedMaterial: {fileID: 8875990532998866636, guid: 08a815d0fcf8730439f0a73c02090872,
@@ -4664,7 +4664,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: https://answers.unity.com/questions/1260393/make-music-continue-playing-through-scenes.html
+  m_text: user persona
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 08a815d0fcf8730439f0a73c02090872, type: 2}
   m_sharedMaterial: {fileID: 8875990532998866636, guid: 08a815d0fcf8730439f0a73c02090872,
